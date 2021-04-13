@@ -14,7 +14,7 @@ class PantallaPerfil: UIView {
 
     private var imagenObjeto: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "17787783")
+        imageView.image = UIImage(named: "icons8-user")
         imageView.contentMode = .scaleToFill
         imageView.layer.borderColor = UIColor.colorPrincipal.cgColor
         imageView.layer.borderWidth = 1
@@ -46,18 +46,6 @@ class PantallaPerfil: UIView {
     
     private let campoNumTelefono: UITextField = {
         return UITextField.cajaTextoT2(titulo: "(914) 120 3710", tipoTeclado: .numberPad)
-    }()
-    
-    private let campoContrasena: UITextField = {
-        let contrasena = UITextField.cajaTextoT2(titulo: "Contraseña", tipoTeclado: .default)
-        contrasena.isSecureTextEntry = true
-        return contrasena
-    }()
-    
-    private let campoConfirmarContrasena: UITextField = {
-        let contrasena = UITextField.cajaTextoT2(titulo: "Contraseña", tipoTeclado: .default)
-        contrasena.isSecureTextEntry = true
-        return contrasena
     }()
     
     private let botonCancelar:UIButton = {
@@ -115,6 +103,7 @@ class PantallaPerfil: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        campoNombreUsuario.delegate = self
         campoNombres.delegate = self
         campoApellidos.delegate = self
         campoNumTelefono.delegate = self
@@ -138,11 +127,14 @@ class PantallaPerfil: UIView {
     func getNumTel() -> String? {
         return campoNumTelefono.text
     }
-    func getContrasena() -> String? {
-        return campoContrasena.text
-    }
-    func getOtraContrasena() -> String? {
-        return campoConfirmarContrasena.text
+    func plasmarInformacion(usuario:Usuario){
+        campoNombreUsuario.text = usuario.nombreUsuario
+        campoNombres.text = usuario.nombre
+        campoApellidos.text = usuario.apellido
+        campoCorreo.text = usuario.correoElectronico
+        campoNumTelefono.text = usuario.telefono
+        
+        campoCorreo.isUserInteractionEnabled = false
     }
     
         
@@ -161,8 +153,8 @@ class PantallaPerfil: UIView {
         pilaVertical.addArrangedSubview(campoCorreo)
         
         pilaVertical.addArrangedSubview(pilaHorizontalBotones)
-        pilaHorizontalBotones.addArrangedSubview(botonCancelar)
         pilaHorizontalBotones.addArrangedSubview(botonRegistrar)
+        pilaHorizontalBotones.addArrangedSubview(botonCancelar)
         
         
         

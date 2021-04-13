@@ -27,6 +27,7 @@ class InvocadorFB: ServiciosFirebaseDelegate{
     
     static var coleccionFireB1  = "usuarios"
     static var coleccionFireB2  = "imagenes"
+    static var atribIdUser      = "id"
     static var atribNombre      = "nombre"
     static var atribApellido    = "apellido"
     static var atribUserName    = "username"

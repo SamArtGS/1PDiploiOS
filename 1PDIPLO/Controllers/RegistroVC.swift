@@ -7,11 +7,18 @@
 //
 
 import UIKit
+import FirebaseFirestore
+import Firebase
 
 class RegistroVC: UIViewController {
     
     weak var coordinador:CoordinatorPrincipal?
     lazy var pantallaRegistro = PantallaRegistro()
+    
+    
+    let db = Firestore.firestore()
+    let storage = Storage.storage()
+    let auth = Auth.auth()
 
     override func viewDidLoad() {
             super.viewDidLoad()

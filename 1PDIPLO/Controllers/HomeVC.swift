@@ -16,9 +16,12 @@ class HomeVC: UICollectionViewController {
     
     private let reuseIdentifier = "Cell"
     var images: [StorageReference] = []
+    var cellScale : CGFloat = 0.7
+
     
-    var db = Firestore.firestore()
+    let db = Firestore.firestore()
     let storage = Storage.storage()
+    let auth = Auth.auth()
     
     var imagenes:[Fotografia] = []
     var usuarios:[Usuario] = []
@@ -44,6 +47,8 @@ class HomeVC: UICollectionViewController {
         navigationItem.hidesBackButton = true
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         self.collectionView!.register(FotoCelda.self, forCellWithReuseIdentifier: reuseIdentifier)
+        ensuciar()
+        //No debería hacer esto pero bueno
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -55,7 +60,6 @@ class HomeVC: UICollectionViewController {
         
         celda.mostrarImagen(referencia: images[indexPath.item])
         descargarImagen(numIndice: indexPath.item)
-        
         return celda
     }
     
@@ -65,7 +69,17 @@ class HomeVC: UICollectionViewController {
         celda.liked()
     }
     
-    
+    private let adorno: UIView = {
+        let vista = UIView()
+        vista.layer.borderWidth = 0
+        vista.layer.masksToBounds = false
+        vista.layer.cornerRadius = 60
+        vista.backgroundColor = .colorSecundario
+        vista.clipsToBounds = true
+        vista.contentMode = .scaleAspectFit
+        vista.translatesAutoresizingMaskIntoConstraints = false
+        return vista
+    }()
     
 }
 
@@ -74,24 +88,34 @@ extension HomeVC : UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let screenSize = UIScreen.main.bounds.size
+        let cellWidth = floor(screenSize.width * cellScale )
+        let cellHeight = floor(screenSize.height * cellScale)
         
-        return CGSize(width: collectionView.bounds.width/3.0,
-                      height: collectionView.bounds.width/3.0)
+        return CGSize(width: cellWidth, height: cellHeight )
     }
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
-    
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
+        return 50
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        let screenSize = UIScreen.main.bounds.size
+        let cellWidth = floor(screenSize.width * cellScale )
+        let cellHeight = floor(screenSize.height * cellScale)
+        let instX = ( view.bounds.width - cellWidth ) / 2.0
+        let instY = ( view.bounds.height - cellHeight ) / 2.0
+        
+        return UIEdgeInsets(top: instX , left: instX , bottom: instY, right: instX )
     }
     
     
@@ -108,5 +132,14 @@ extension HomeVC{
         let registroVC = BannerSubirImagenVC()
         registroVC.modalPresentationStyle = .automatic
         present(registroVC, animated: true)
+    }
+}
+extension HomeVC{
+    func ensuciar(){
+        view.addSubview(adorno)
+        adorno.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        adorno.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        adorno.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 30).isActive = true
+        adorno.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.1).isActive = true
     }
 }

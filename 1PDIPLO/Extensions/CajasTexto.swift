@@ -26,7 +26,7 @@ extension UITextField{
     static func cajaTextoT2(titulo: String, tipoTeclado: UIKeyboardType) -> UITextField {
         let textField: UITextField = UITextField()
         textField.textColor = .black
-        textField.isUserInteractionEnabled = false
+        textField.isUserInteractionEnabled = true
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.placeholder = titulo
         textField.font = .systemFont(ofSize: 20, weight: .medium)

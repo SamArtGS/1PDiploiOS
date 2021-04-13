@@ -107,7 +107,9 @@ class PantallaRegistro: UIView{
     func getCorreo() -> String? {
         return campoCorreo.text
     }
-    
+    func getUsername() -> String? {
+        return campoNombreUsuario.text
+    }
     func getNumTel() -> String? {
         return campoNumTelefono.text
     }
@@ -148,6 +150,8 @@ class PantallaRegistro: UIView{
             campoApellidos.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
             campoApellidos.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
             
+            campoNombreUsuario.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
+            campoNombreUsuario.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
             
             campoNumTelefono.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
             campoNumTelefono.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),

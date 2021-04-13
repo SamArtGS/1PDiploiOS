@@ -11,29 +11,6 @@ import Firebase
 import CoreServices
 import FirebaseUI
 
-extension PerfilVC: PerfilDelegate{
-    func guardarInfo() {
-        pantallaPerfil.editar()
-    }
-    
-    func editarInformacion() {
-        print("Hola")
-    }
-    
-    func tomarFotoPerfil() {
-        print("Hola")
-    }
-    
-    func quitar() {
-        print("Hola")
-    }
-    
-    func cerrarSesion() {
-        print("Hola")
-    }
-    
-}
-
 extension BannerSubirImagenVC : SeleccionarFotoDelegate{
     
     func getData(){
@@ -136,8 +113,6 @@ extension BannerSubirImagenVC : SeleccionarFotoDelegate{
                         print("Data de la imagen subida")
                     }
                 }
-                
-                print("Metadata de la imagen: \(String(describing: metadata))")
                 self.mostrarAlerta(title: "Listo! ✅", message: "La imagen se ha subido con éxito")
                 self.coordinador?.atras()
             }

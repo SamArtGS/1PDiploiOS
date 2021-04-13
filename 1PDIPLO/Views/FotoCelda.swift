@@ -15,7 +15,11 @@ class FotoCelda: UICollectionViewCell {
     private var imagenObjeto: UIImageView = {
        let vistaImagen = UIImageView()
        vistaImagen.image = UIImage(named: "17787783")
-        vistaImagen.isUserInteractionEnabled = true
+       vistaImagen.isUserInteractionEnabled = true
+       vistaImagen.layer.borderWidth = 0
+       vistaImagen.layer.masksToBounds = false
+       vistaImagen.layer.cornerRadius = 30
+       vistaImagen.clipsToBounds = true
        vistaImagen.contentMode = .scaleToFill
        vistaImagen.translatesAutoresizingMaskIntoConstraints = false
        return vistaImagen
@@ -35,7 +39,7 @@ class FotoCelda: UICollectionViewCell {
         etiqueta.text = "Usuario"
         etiqueta.translatesAutoresizingMaskIntoConstraints = false
         etiqueta.textColor = .white
-        etiqueta.font = .systemFont(ofSize: 14, weight: .bold)
+        etiqueta.font = .systemFont(ofSize: 24, weight: .bold)
         etiqueta.contentMode = .scaleAspectFit
         etiqueta.adjustsFontForContentSizeCategory = true
         return etiqueta
@@ -48,7 +52,7 @@ class FotoCelda: UICollectionViewCell {
         etiqueta.translatesAutoresizingMaskIntoConstraints = false
         etiqueta.textColor = .black
         etiqueta.contentMode = .scaleAspectFit
-        etiqueta.font = .systemFont(ofSize: 14, weight: .bold)
+        etiqueta.font = .systemFont(ofSize: 18, weight: .bold)
         etiqueta.adjustsFontForContentSizeCategory = true
         return etiqueta
     }()
@@ -84,6 +88,16 @@ class FotoCelda: UICollectionViewCell {
         addSubview(imagenCorazon)
         imagenCorazon.addSubview(numLikes)
         
+        
+        backgroundColor = UIColor.black
+        layer.borderWidth = 1
+        layer.shadowColor = UIColor.gray.cgColor
+        layer.shadowRadius = 10.0
+        layer.cornerRadius = 30
+        layer.borderColor = UIColor.lightGray.cgColor
+        layer.shadowOffset = CGSize(width: 200.0, height: 500.0)
+        layer.shadowRadius = 2.0
+        
         NSLayoutConstraint.activate([
             imagenObjeto.topAnchor.constraint(equalTo: topAnchor),
             imagenObjeto.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -91,13 +105,13 @@ class FotoCelda: UICollectionViewCell {
             imagenObjeto.bottomAnchor.constraint(equalTo: bottomAnchor),
             
             usuario.bottomAnchor.constraint(equalTo: bottomAnchor,constant: -5),
-            usuario.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
+            usuario.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
             usuario.trailingAnchor.constraint(equalTo: trailingAnchor),
             
             imagenCorazon.topAnchor.constraint(equalTo: topAnchor, constant: 2),
             imagenCorazon.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -2),
-            imagenCorazon.heightAnchor.constraint(equalToConstant: 40),
-            imagenCorazon.widthAnchor.constraint(equalToConstant: 40),
+            imagenCorazon.heightAnchor.constraint(equalToConstant: 70),
+            imagenCorazon.widthAnchor.constraint(equalToConstant: 70),
             numLikes.centerXAnchor.constraint(equalTo: imagenCorazon.centerXAnchor),
             numLikes.centerYAnchor.constraint(equalTo: imagenCorazon.centerYAnchor, constant: -2)
         ])

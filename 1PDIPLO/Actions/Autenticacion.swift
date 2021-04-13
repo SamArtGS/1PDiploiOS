@@ -41,15 +41,11 @@ extension InicioSesionVC: InicioSesionDelegate{
             }else{
                 print("nombre usuario correcto login correcto")
                 let scrollLayoutVertical = UICollectionViewFlowLayout()
-                scrollLayoutVertical.scrollDirection = .vertical
+                scrollLayoutVertical.scrollDirection = .horizontal
                 let vc = HomeVC(collectionViewLayout: scrollLayoutVertical)
                 self.navigationController?.pushViewController(vc, animated: true)
             }
         }
-        let scrollLayoutVertical = UICollectionViewFlowLayout()
-                        scrollLayoutVertical.scrollDirection = .vertical
-        let vc = HomeVC(collectionViewLayout: scrollLayoutVertical)
-        self.navigationController?.pushViewController(vc, animated: true)
         
     }
 }
@@ -78,13 +74,26 @@ extension RegistroVC: RegistroDelegate{
             return
         }
         
-        Auth.auth().createUser(withEmail: email, password: passwd) { (result, error) in
+        auth.createUser(withEmail: email, password: passwd) { (result, error) in
            if let error = error {
               self.mostrarAlerta(title: "Error", message: "Error al crear al usuario 😪 \(error.localizedDescription)")
                 print(error)
            } else {
-                self.mostrarAlerta(title: "Todo bien ✅", message: "Registro creado con éxito 😀")
-                self.dismiss(animated: true, completion: nil)
+                self.db.collection(InvocadorFB.coleccionFireB1).addDocument(data: [
+                    InvocadorFB.atribIdUser: result?.user.uid ?? "",
+                    InvocadorFB.atribNombre:  self.pantallaRegistro.getNombre() ?? "",
+                    InvocadorFB.atribApellido: self.pantallaRegistro.getApellido() ?? "",
+                    InvocadorFB.atribNumTel: self.pantallaRegistro.getNumTel() ?? "",
+                    InvocadorFB.atribUserName: self.pantallaRegistro.getUsername() ?? "",
+                    InvocadorFB.atribCorreo: self.pantallaRegistro.getCorreo() ?? "",
+                    InvocadorFB.atribImagenUs: ""
+                ]){ error in
+                    if let error = error{
+                        print("Error \(error.localizedDescription)")
+                    }else{
+                        self.mostrarAlerta(title: "Todo bien ✅", message: "Registro creado con éxito 😀")
+                    }
+                }
             }
         }
     }

@@ -14,10 +14,18 @@ class PerfilVC: UIViewController {
 
     weak var coordinador:CoordinatorPrincipal?
     lazy var pantallaPerfil = PantallaPerfil()
+    
+    let db = Firestore.firestore()
+    let storage = Storage.storage()
+    let auth = Auth.auth()
+    
+    var imagenes:[Fotografia] = []
+    var usuarios:[Usuario] = []
 
     override func viewDidLoad() {
             super.viewDidLoad()
             configure()
+        getData()
     }
         
     override func viewWillAppear(_ animated: Bool) {
