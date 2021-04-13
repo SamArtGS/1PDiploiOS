@@ -3,10 +3,11 @@
 
 ### Características
 
-- Realizada con AutoLayout (Sin StoryBoards, solo Anchors)
+- Realizada con AutoLayout, vistas programadas (Sin StoryBoards, solo Anchors)
 - Separación lo más que se pudo MVC
 - Delegados para separar las tareas 
-- Se tiene el perfil del usuario registrado, subir fotos y poder darles "like" a un repositorio de fotos común.
+- Se puede ver el perfil del usuario registrado y editarlo
+- Subir fotos y poder darles "like" a un repositorio de fotos común.
 - Un coordinador para llevar las vistas (bugs)
 
 <p align="center">

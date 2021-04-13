@@ -52,13 +52,15 @@ class HomeVC: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return images.count
+        return imagenes.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let celda = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! FotoCelda
         
         celda.mostrarImagen(referencia: images[indexPath.item])
+        celda.setEstado(string: imagenes[indexPath.item].nombre)
+        celda.setLikes(string: "\(imagenes[indexPath.item].likes)")
         descargarImagen(numIndice: indexPath.item)
         return celda
     }

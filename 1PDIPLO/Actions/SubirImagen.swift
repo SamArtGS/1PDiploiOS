@@ -101,8 +101,8 @@ extension BannerSubirImagenVC : SeleccionarFotoDelegate{
             } else {
                 
                 self.db.collection(InvocadorFB.coleccionFireB2).addDocument(data: [
-                    InvocadorFB.atribNombre:  "\(String(describing: metadata?.timeCreated))",
-                    InvocadorFB.atribFechaImg: "SS",
+                    InvocadorFB.atribNombre:  self.pantallaFoto.getEstado() ?? "",
+                    InvocadorFB.atribFechaImg: "\(String(describing: metadata?.timeCreated!))",
                     InvocadorFB.atribUrlImg: "\(InvocadorFB.coleccionFireB2)/Muro/\(nombreImagen)",
                     InvocadorFB.atribNumLikImg: "0",
                     InvocadorFB.usuarioID: self.autentication.currentUser?.uid ?? "Nadie"

@@ -23,6 +23,16 @@ class PantallaBannerSeleccionador: UIView {
             imageView.isUserInteractionEnabled = true
             return imageView
         }()
+    
+        private let presionaMe: UILabel = {
+            let etiqueta = UILabel()
+            etiqueta.textColor = .brown
+            etiqueta.font = .systemFont(ofSize: 20, weight: .bold)
+            etiqueta.contentMode = .scaleAspectFit
+            etiqueta.translatesAutoresizingMaskIntoConstraints = false
+            etiqueta.text = "Presiona para agregar foto 📷"
+            return etiqueta
+        }()
         
         private let campoDescripcion: UITextField = {
             return UITextField.cajaTextoT1(titulo: "Agrega un status de la foto!", tipoTeclado: .twitter)
@@ -80,6 +90,11 @@ class PantallaBannerSeleccionador: UIView {
             botonEnviar.isUserInteractionEnabled = true
         }
     
+        func getEstado() -> String? {
+            return campoDescripcion.text
+        }
+    
+    
         func getImagen() -> UIImage?{
             return imagenObjeto.image
         }
@@ -89,6 +104,7 @@ class PantallaBannerSeleccionador: UIView {
             imagenObjeto.addGestureRecognizer(gestoTap)
             
             addSubview(pilaVertical)
+            imagenObjeto.addSubview(presionaMe)
             backgroundColor = .white
             translatesAutoresizingMaskIntoConstraints = false
             pilaVertical.addArrangedSubview(imagenObjeto)
@@ -107,6 +123,8 @@ class PantallaBannerSeleccionador: UIView {
                 pilaVertical.bottomAnchor.constraint(equalTo: bottomAnchor,constant: -70),
                 imagenObjeto.heightAnchor.constraint(equalToConstant: 200),
                 imagenObjeto.widthAnchor.constraint(equalToConstant: 200),
+                presionaMe.centerXAnchor.constraint(equalTo: imagenObjeto.centerXAnchor),
+                presionaMe.centerYAnchor.constraint(equalTo: imagenObjeto.centerYAnchor),
                 campoDescripcion.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
                 campoDescripcion.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
                 botonCancelar.widthAnchor.constraint(equalToConstant: 120),

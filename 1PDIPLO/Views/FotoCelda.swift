@@ -44,6 +44,19 @@ class FotoCelda: UICollectionViewCell {
         etiqueta.adjustsFontForContentSizeCategory = true
         return etiqueta
     }()
+    private let estado: UILabel = {
+        let etiqueta = UILabel()
+        etiqueta.lineBreakMode = .byWordWrapping
+        etiqueta.numberOfLines = 3
+        etiqueta.text = "Estado"
+        etiqueta.translatesAutoresizingMaskIntoConstraints = false
+        etiqueta.textColor = .white
+        etiqueta.font = .systemFont(ofSize: 20, weight: .medium)
+        etiqueta.contentMode = .scaleAspectFit
+        etiqueta.adjustsFontForContentSizeCategory = true
+        return etiqueta
+    }()
+    
     
     private let numLikes: UILabel = {
         let etiqueta = UILabel()
@@ -80,12 +93,18 @@ class FotoCelda: UICollectionViewCell {
     func mostrarImagen(referencia: StorageReference){
         imagenObjeto.sd_setImage(with: referencia, placeholderImage: UIImage(named: "Logo"))
     }
-    
+    func setEstado(string: String) {
+        estado.text = string
+    }
+    func setLikes(string: String) {
+        numLikes.text = string
+    }
     private func configurarConstraints(){
         self.isUserInteractionEnabled = true
         addSubview(imagenObjeto)
         addSubview(usuario)
         addSubview(imagenCorazon)
+        addSubview(estado)
         imagenCorazon.addSubview(numLikes)
         
         
@@ -107,6 +126,11 @@ class FotoCelda: UICollectionViewCell {
             usuario.bottomAnchor.constraint(equalTo: bottomAnchor,constant: -5),
             usuario.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
             usuario.trailingAnchor.constraint(equalTo: trailingAnchor),
+            
+            estado.centerXAnchor.constraint(equalTo: centerXAnchor),
+            estado.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -50),
+            estado.leadingAnchor.constraint(equalTo: leadingAnchor,   constant: 20),
+            estado.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             
             imagenCorazon.topAnchor.constraint(equalTo: topAnchor, constant: 2),
             imagenCorazon.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -2),
