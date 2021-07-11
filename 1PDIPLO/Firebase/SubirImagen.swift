@@ -77,9 +77,14 @@ extension BannerSubirImagenVC : SeleccionarFotoDelegate{
     func usarCamara(alertARgument: UIAlertAction!){
         let userImagePicker = UIImagePickerController()
         userImagePicker.delegate = self
-        userImagePicker.sourceType = .camera
-        userImagePicker.mediaTypes = ["public.image"]
-        present(userImagePicker, animated: true, completion: nil)
+        #if targetEnvironment(simulator)
+            mostrarAlerta(title: "NO HAY CAMARA", message: "Estás usando un simulador, se morirá si abres la cámara")
+            return
+        #else
+            userImagePicker.sourceType = .camera
+            userImagePicker.mediaTypes = ["public.image"]
+            present(userImagePicker, animated: true, completion: nil)
+        #endif
     }
     
     func subirFoto(image: UIImage?) {
@@ -105,7 +110,7 @@ extension BannerSubirImagenVC : SeleccionarFotoDelegate{
                     InvocadorFB.atribFechaImg: "\(String(describing: metadata?.timeCreated!))",
                     InvocadorFB.atribUrlImg: "\(InvocadorFB.coleccionFireB2)/Muro/\(nombreImagen)",
                     InvocadorFB.atribNumLikImg: "0",
-                    InvocadorFB.usuarioID: self.autentication.currentUser?.uid ?? "Nadie"
+                    InvocadorFB.usuarioID: self.autentication.currentUser?.uid ?? "0"
                 ]){ error in
                     if let error = error{
                         print("Error \(error.localizedDescription)")

@@ -17,16 +17,12 @@ extension HomeVC: HomeVCDelegate{
         images[numIndice].downloadURL { (url, error) in
             if let error = error{
                 print(error.localizedDescription)
-            } else {
-                print("URL:  \(String(describing: url!))")
             }
         }
     }
     
     func getData(){
         db.collection(InvocadorFB.coleccionFireB1).order(by: InvocadorFB.atribNombre).addSnapshotListener{ (snapshot, error) in
-            
-            print("Se está activando este cochino listener")
             if let error = error {
                 print("Error al obtener la lista de usuarios \(error.localizedDescription)")
             } else {
@@ -48,15 +44,12 @@ extension HomeVC: HomeVCDelegate{
             }
         }
         db.collection(InvocadorFB.coleccionFireB2).order(by: InvocadorFB.atribNomImg).addSnapshotListener{ (snapshot, error) in
-            
-            print("Se está activando este otro cochino listener")
             if let error = error {
                 print("Error al obtener la lista de imágenes \(error.localizedDescription)")
             } else {
                 self.imagenes.removeAll()
                 self.images.removeAll()
                 for document in snapshot!.documents{
-                    print("\(document.documentID) => \(document.data())")
                     let id = document.documentID as String
                     let data        = document.data()
                     let nombre      = data[InvocadorFB.atribNomImg] as? String ?? ""
@@ -77,43 +70,39 @@ extension HomeVC: HomeVCDelegate{
     }
     
     func darLike() {
-        print("Hola")
+        db.collection(InvocadorFB.coleccionFireB2).document()
     }
 }
 
 extension PerfilVC: PerfilDelegate{
     func guardarInfo() {
-        print("Si se está realizando el delegate")
         pantallaPerfil.editar()
     }
     
     func editarInformacion() {
-        print("Hola")
+        
     }
     
     func tomarFotoPerfil() {
-        print("Hola")
+        
     }
     
     func quitar() {
-        print("Hola")
+        self.dismiss(animated: true)
     }
     
     func cerrarSesion() {
-        print("Hola")
+        
     }
     
     
     func getData(){
         db.collection(InvocadorFB.coleccionFireB1).order(by: InvocadorFB.atribNombre).addSnapshotListener{ (snapshot, error) in
-            
-            print("Se está activando este cochino listener")
             if let error = error {
                 print("Error al obtener la lista de usuarios \(error.localizedDescription)")
             } else {
                 self.usuarios.removeAll()
                 for document in snapshot!.documents{
-                    print("\(document.documentID) => \(document.data())")
                     let id = document.documentID as String
                     let data = document.data()
                     let nombre        = data[InvocadorFB.atribNombre] as? String ?? ""
@@ -149,8 +138,6 @@ extension PerfilVC: PerfilDelegate{
         }
 
         db.collection(InvocadorFB.coleccionFireB2).order(by: InvocadorFB.atribNomImg).addSnapshotListener{ (snapshot, error) in
-            
-            print("Se está activando este otro cochino listener")
             if let error = error {
                 print("Error al obtener la lista de imágenes \(error.localizedDescription)")
             } else {

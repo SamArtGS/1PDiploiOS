@@ -11,6 +11,7 @@ import UIKit
 class PantallaRegistro: UIView{
     
     weak var delegate: RegistroDelegate?
+    weak var textFieldDelegate: UITextFieldDelegate?
 
     private var imagenObjeto: UIImageView = {
         let imageView = UIImageView()
@@ -20,12 +21,16 @@ class PantallaRegistro: UIView{
         return imageView
     }()
     
-    private let campoNombres: UITextField = {
+    let campoNombres: UITextField = {
         return UITextField.cajaTextoT1(titulo: "Nombre (s)",tipoTeclado: .default)
     }()
     
-    private let campoApellidos: UITextField = {
+    let campoApellidos: UITextField = {
         return UITextField.cajaTextoT1(titulo: "Apellido (s)", tipoTeclado: .default)
+    }()
+    
+    let campoNumTelefono: UITextField = {
+        return UITextField.cajaTextoT1(titulo: "Teléfono", tipoTeclado: .numberPad)
     }()
     
     private let campoCorreo: UITextField = {
@@ -36,9 +41,7 @@ class PantallaRegistro: UIView{
         return UITextField.cajaTextoT1(titulo: "Nombre Usuario", tipoTeclado: .numberPad)
     }()
     
-    private let campoNumTelefono: UITextField = {
-        return UITextField.cajaTextoT1(titulo: "Teléfono", tipoTeclado: .numberPad)
-    }()
+    
     
     private let campoContrasena: UITextField = {
         let contrasena = UITextField.cajaTextoT1(titulo: "Contraseña", tipoTeclado: .default)
@@ -86,11 +89,10 @@ class PantallaRegistro: UIView{
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        campoNombres.delegate = self
-        campoApellidos.delegate = self
-        campoNumTelefono.delegate = self
-        campoContrasena.delegate = self
-        campoConfirmarContrasena.delegate = self
+        campoNombreUsuario.delegate = textFieldDelegate
+        campoCorreo.delegate = textFieldDelegate
+        campoContrasena.delegate = textFieldDelegate
+        campoConfirmarContrasena.delegate = textFieldDelegate
         configure()
     }
     

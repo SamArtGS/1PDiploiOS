@@ -99,7 +99,7 @@ extension RegistroVC: RegistroDelegate{
     }
     
     func quitar() {
-        dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true)
     }
 }
 

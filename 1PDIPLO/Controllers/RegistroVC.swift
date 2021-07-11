@@ -23,6 +23,7 @@ class RegistroVC: UIViewController {
     override func viewDidLoad() {
             super.viewDidLoad()
             configure()
+        adjustInputText()
     }
         
     override func viewWillAppear(_ animated: Bool) {
@@ -40,6 +41,8 @@ class RegistroVC: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: self.view.window)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: self.view.window)
         UIView.animate(withDuration: 0.5,
                      delay: 0.3,
                      options: [],
@@ -49,10 +52,12 @@ class RegistroVC: UIViewController {
     }
     
     func configure(){
+        pantallaRegistro.textFieldDelegate = self
         pantallaRegistro.delegate = self
         pantallaRegistro.center = view.center
         view.addSubview(pantallaRegistro)
         view.backgroundColor = .white
+        
         NSLayoutConstraint.activate([
             pantallaRegistro.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             pantallaRegistro.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),

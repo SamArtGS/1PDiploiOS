@@ -8,40 +8,40 @@
 
 import UIKit
 
-protocol InicioSesionDelegate: class{
+protocol InicioSesionDelegate: AnyObject{
     func registrar()
     func olvidoContrasena()
     func acceso()
 }
 
-protocol RegistroDelegate: class{
+protocol RegistroDelegate: AnyObject{
     func quitar()
     func registrar()
 }
 
-protocol OlvidoContrasenaDelegate: class{
+protocol OlvidoContrasenaDelegate: AnyObject{
     func enviarCorreo()
     func quitar()
 }
 
-protocol HomeVCDelegate: class {
+protocol HomeVCDelegate: AnyObject {
     func descargarImagen(numIndice: Int)
     func Mostrar()
     func darLike()
 }
 
-protocol PerfilDelegate: class{
+protocol PerfilDelegate: AnyObject{
     func guardarInfo()
     func editarInformacion()
     func tomarFotoPerfil()
     func quitar()
     func cerrarSesion()
 }
-protocol SeleccionarFotoDelegate: class {
+protocol SeleccionarFotoDelegate: AnyObject {
     func seleccionarFuente()
     func subirFoto(image: UIImage?)
     func quitar()
 }
-protocol ImagePickerDelegate: class {
+protocol ImagePickerDelegate: AnyObject {
     func didSelect(image: UIImage?)
 }

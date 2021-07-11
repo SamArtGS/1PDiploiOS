@@ -38,6 +38,7 @@ class HomeVC: UICollectionViewController {
     
     func configure(){
         self.title = "1PDIPLO"
+        self.view.isUserInteractionEnabled = true
         configureNavigationBar(largeTitleColor: .white, backgoundColor: .colorPrincipal, tintColor: .colorTerciario, title: "Primer Proyecto", preferredLargeTitle: true)
         let BarButtonItemDerecho = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .done, target: self, action: #selector(agregarFoto))
         let BarButtonItemIzquierdo = UIBarButtonItem(image: UIImage(systemName: "person.circle"), style: .done, target: self, action: #selector(irPerfil))
@@ -45,10 +46,9 @@ class HomeVC: UICollectionViewController {
         navigationItem.rightBarButtonItem = BarButtonItemDerecho
         collectionView.backgroundColor = .white
         navigationItem.hidesBackButton = true
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.isUserInteractionEnabled = true
         self.collectionView!.register(FotoCelda.self, forCellWithReuseIdentifier: reuseIdentifier)
-        ensuciar()
-        //No debería hacer esto pero bueno
+        ponerAdorno()
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -65,18 +65,13 @@ class HomeVC: UICollectionViewController {
         return celda
     }
     
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("toque \(indexPath.item)")
-        let celda = collectionView.cellForItem(at: indexPath) as! FotoCelda
-        celda.liked()
-    }
-    
     private let adorno: UIView = {
         let vista = UIView()
         vista.layer.borderWidth = 0
         vista.layer.masksToBounds = false
         vista.layer.cornerRadius = 60
         vista.backgroundColor = .colorSecundario
+        vista.isUserInteractionEnabled = true
         vista.clipsToBounds = true
         vista.contentMode = .scaleAspectFit
         vista.translatesAutoresizingMaskIntoConstraints = false
@@ -137,7 +132,7 @@ extension HomeVC{
     }
 }
 extension HomeVC{
-    func ensuciar(){
+    func ponerAdorno(){
         view.addSubview(adorno)
         adorno.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         adorno.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true

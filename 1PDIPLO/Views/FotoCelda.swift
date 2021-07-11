@@ -14,36 +14,40 @@ class FotoCelda: UICollectionViewCell {
     
     private var imagenObjeto: UIImageView = {
        let vistaImagen = UIImageView()
-       vistaImagen.image = UIImage(named: "17787783")
        vistaImagen.isUserInteractionEnabled = true
        vistaImagen.layer.borderWidth = 0
        vistaImagen.layer.masksToBounds = false
        vistaImagen.layer.cornerRadius = 30
+        vistaImagen.isUserInteractionEnabled = true
        vistaImagen.clipsToBounds = true
        vistaImagen.contentMode = .scaleToFill
        vistaImagen.translatesAutoresizingMaskIntoConstraints = false
        return vistaImagen
     }()
     
+    @objc func didTapImageView(_ sender: UITapGestureRecognizer) {
+        if imagenCorazon.accessibilityHint == "love-nome"{
+            self.imagenCorazon.accessibilityHint = "love-me"
+            self.imagenCorazon.image = UIImage(named: "love-me")
+            self.numLikes.text = "\(Int(numLikes.text ?? "0")! + 1)"
+        }else{
+            self.imagenCorazon.accessibilityHint = "love-nome"
+            self.imagenCorazon.image = UIImage(named: "love-nome")
+            self.numLikes.text = "\(Int(numLikes.text ?? "0")! - 1)"
+        }
+    }
+    
     private var imagenCorazon: UIImageView = {
         let vistaImagen = UIImageView()
         vistaImagen.image = UIImage(named: "love-nome")
+        vistaImagen.accessibilityHint = "love-nome"
         vistaImagen.isUserInteractionEnabled = true
         vistaImagen.contentMode = .scaleAspectFit
         vistaImagen.translatesAutoresizingMaskIntoConstraints = false
         return vistaImagen
     }()
     
-    private let usuario: UILabel = {
-        let etiqueta = UILabel()
-        etiqueta.text = "Usuario"
-        etiqueta.translatesAutoresizingMaskIntoConstraints = false
-        etiqueta.textColor = .white
-        etiqueta.font = .systemFont(ofSize: 24, weight: .bold)
-        etiqueta.contentMode = .scaleAspectFit
-        etiqueta.adjustsFontForContentSizeCategory = true
-        return etiqueta
-    }()
+    
     private let estado: UILabel = {
         let etiqueta = UILabel()
         etiqueta.lineBreakMode = .byWordWrapping
@@ -60,7 +64,6 @@ class FotoCelda: UICollectionViewCell {
     
     private let numLikes: UILabel = {
         let etiqueta = UILabel()
-        etiqueta.text = "10"
         etiqueta.isUserInteractionEnabled = true
         etiqueta.translatesAutoresizingMaskIntoConstraints = false
         etiqueta.textColor = .black
@@ -73,6 +76,7 @@ class FotoCelda: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        isUserInteractionEnabled = true
         configurarConstraints()
     }
     
@@ -80,35 +84,27 @@ class FotoCelda: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func liked(){
-        imagenCorazon.image = UIImage(named: "love-me")
-        numLikes.text = "11"
-    }
-    
-    func disliked(){
-        imagenCorazon.image = UIImage(named: "love-nome")
-        numLikes.text = "11"
-    }
-    
     func mostrarImagen(referencia: StorageReference){
         imagenObjeto.sd_setImage(with: referencia, placeholderImage: UIImage(named: "Logo"))
     }
+    
     func setEstado(string: String) {
         estado.text = string
     }
+    
     func setLikes(string: String) {
         numLikes.text = string
     }
+    
     private func configurarConstraints(){
         self.isUserInteractionEnabled = true
         addSubview(imagenObjeto)
-        addSubview(usuario)
         addSubview(imagenCorazon)
         addSubview(estado)
         imagenCorazon.addSubview(numLikes)
+        imagenObjeto.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapImageView(_:))))
         
-        
-        backgroundColor = UIColor.black
+        backgroundColor = UIColor.white
         layer.borderWidth = 1
         layer.shadowColor = UIColor.gray.cgColor
         layer.shadowRadius = 10.0
@@ -122,10 +118,6 @@ class FotoCelda: UICollectionViewCell {
             imagenObjeto.leadingAnchor.constraint(equalTo: leadingAnchor),
             imagenObjeto.trailingAnchor.constraint(equalTo: trailingAnchor),
             imagenObjeto.bottomAnchor.constraint(equalTo: bottomAnchor),
-            
-            usuario.bottomAnchor.constraint(equalTo: bottomAnchor,constant: -5),
-            usuario.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
-            usuario.trailingAnchor.constraint(equalTo: trailingAnchor),
             
             estado.centerXAnchor.constraint(equalTo: centerXAnchor),
             estado.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -50),

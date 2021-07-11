@@ -33,7 +33,7 @@
 		54E828982622B11A00F78D51 /* Colores.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E828972622B11A00F78D51 /* Colores.swift */; };
 		54E8289A262361A400F78D51 /* Protocolos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E82899262361A400F78D51 /* Protocolos.swift */; };
 		54E8289C2623709100F78D51 /* Botones.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E8289B2623709100F78D51 /* Botones.swift */; };
-		54E8289E262374BB00F78D51 /* CajasTexto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E8289D262374BB00F78D51 /* CajasTexto.swift */; };
+		54E8289E262374BB00F78D51 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E8289D262374BB00F78D51 /* TextField.swift */; };
 		54E828A02623760E00F78D51 /* RegistroVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E8289F2623760E00F78D51 /* RegistroVC.swift */; };
 		54E828A22623762300F78D51 /* OlvidoContrasenaVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E828A12623762300F78D51 /* OlvidoContrasenaVC.swift */; };
 		54E828A42623763C00F78D51 /* ImagenSeleccionadaVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E828A32623763C00F78D51 /* ImagenSeleccionadaVC.swift */; };
@@ -90,7 +90,7 @@
 		54E828972622B11A00F78D51 /* Colores.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colores.swift; sourceTree = "<group>"; };
 		54E82899262361A400F78D51 /* Protocolos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocolos.swift; sourceTree = "<group>"; };
 		54E8289B2623709100F78D51 /* Botones.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Botones.swift; sourceTree = "<group>"; };
-		54E8289D262374BB00F78D51 /* CajasTexto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CajasTexto.swift; sourceTree = "<group>"; };
+		54E8289D262374BB00F78D51 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		54E8289F2623760E00F78D51 /* RegistroVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistroVC.swift; sourceTree = "<group>"; };
 		54E828A12623762300F78D51 /* OlvidoContrasenaVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OlvidoContrasenaVC.swift; sourceTree = "<group>"; };
 		54E828A32623763C00F78D51 /* ImagenSeleccionadaVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagenSeleccionadaVC.swift; sourceTree = "<group>"; };
@@ -170,7 +170,7 @@
 		543B8AD9260A39C500F9AD09 /* 1PDIPLO */ = {
 			isa = PBXGroup;
 			children = (
-				54964F5A2623D5890096D747 /* Actions */,
+				54964F5A2623D5890096D747 /* Firebase */,
 				54E828922622A98E00F78D51 /* Base */,
 				543B8AE3260A39C900F9AD09 /* Assets.xcassets */,
 				543B8AFC260A3C4E00F9AD09 /* Models */,
@@ -218,7 +218,7 @@
 			children = (
 				54E828972622B11A00F78D51 /* Colores.swift */,
 				54E8289B2623709100F78D51 /* Botones.swift */,
-				54E8289D262374BB00F78D51 /* CajasTexto.swift */,
+				54E8289D262374BB00F78D51 /* TextField.swift */,
 				54964F61262416920096D747 /* ViewController.swift */,
 				54964F5F26240F460096D747 /* Images.swift */,
 				548AE6082624ED45000A6C72 /* ImagePicker.swift */,
@@ -226,14 +226,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		54964F5A2623D5890096D747 /* Actions */ = {
+		54964F5A2623D5890096D747 /* Firebase */ = {
 			isa = PBXGroup;
 			children = (
 				54964F5B2623D5B30096D747 /* Autenticacion.swift */,
 				54964F5D2623D5C40096D747 /* SubirImagen.swift */,
 				548AE6062624DDF1000A6C72 /* MostrarInformacion.swift */,
 			);
-			path = Actions;
+			path = Firebase;
 			sourceTree = "<group>";
 		};
 		54E828922622A98E00F78D51 /* Base */ = {
@@ -457,7 +457,7 @@
 				54E828A22623762300F78D51 /* OlvidoContrasenaVC.swift in Sources */,
 				54E828A6262377E300F78D51 /* PantallaRegistro.swift in Sources */,
 				54E8289C2623709100F78D51 /* Botones.swift in Sources */,
-				54E8289E262374BB00F78D51 /* CajasTexto.swift in Sources */,
+				54E8289E262374BB00F78D51 /* TextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
